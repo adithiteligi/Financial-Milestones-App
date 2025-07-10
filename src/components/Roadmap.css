@@ -1,0 +1,428 @@
+.roadmap {
+  margin-top: 24px;
+  position: relative;
+}
+
+.roadmap-header {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.roadmap-header h2 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 6px;
+}
+
+.roadmap-header p {
+  color: #a0a0a0;
+  font-size: 0.9rem;
+}
+
+.roadmap-container {
+  position: relative;
+  padding: 20px 0;
+  min-height: 400px;
+}
+
+/* Curved timeline background */
+.roadmap-container::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: linear-gradient(180deg, 
+    transparent 0%, 
+    #22c55e 10%, 
+    #16a34a 50%, 
+    #22c55e 90%, 
+    transparent 100%);
+  border-radius: 2px;
+  transform: translateX(-50%);
+  box-shadow: 0 0 20px rgba(34, 197, 94, 0.3);
+}
+
+/* Curved path using SVG */
+.roadmap-curve {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.roadmap-curve svg {
+  width: 100%;
+  height: 100%;
+}
+
+.roadmap-curve path {
+  stroke: linear-gradient(90deg, #22c55e, #16a34a);
+  stroke-width: 2;
+  fill: none;
+  stroke-dasharray: 5, 5;
+  animation: dash 20s linear infinite;
+}
+
+@keyframes dash {
+  to {
+    stroke-dashoffset: -100;
+  }
+}
+
+.roadmap-item {
+  position: relative;
+  margin-bottom: 30px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  -webkit-tap-highlight-color: transparent;
+  z-index: 2;
+}
+
+.roadmap-item:nth-child(odd) {
+  margin-left: 0;
+  margin-right: 50%;
+  padding-right: 20px;
+}
+
+.roadmap-item:nth-child(even) {
+  margin-left: 50%;
+  margin-right: 0;
+  padding-left: 20px;
+}
+
+.roadmap-item:hover {
+  transform: translateY(-4px);
+}
+
+.roadmap-item:active {
+  transform: translateY(-2px);
+}
+
+.roadmap-item.completed .goal-card {
+  border-color: #22c55e;
+  background: rgba(34, 197, 94, 0.1);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+.roadmap-connector {
+  position: absolute;
+  top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.roadmap-item:nth-child(odd) .roadmap-connector {
+  right: -25px;
+}
+
+.roadmap-item:nth-child(even) .roadmap-connector {
+  left: -25px;
+}
+
+.connector-line {
+  width: 20px;
+  height: 2px;
+  background: linear-gradient(90deg, #22c55e, #16a34a);
+  box-shadow: 0 0 10px rgba(34, 197, 94, 0.5);
+}
+
+.roadmap-item:nth-child(odd) .connector-line {
+  background: linear-gradient(90deg, #22c55e, #16a34a);
+}
+
+.roadmap-item:nth-child(even) .connector-line {
+  background: linear-gradient(90deg, #16a34a, #22c55e);
+}
+
+.connector-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #22c55e, #16a34a);
+  border: 3px solid #1a1a1a;
+  box-shadow: 0 0 0 2px #22c55e, 0 0 20px rgba(34, 197, 94, 0.6);
+  position: relative;
+}
+
+.connector-dot::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 4px;
+  height: 4px;
+  background: #ffffff;
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+}
+
+.goal-card {
+  background: rgba(26, 26, 26, 0.7);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 20px;
+  transition: all 0.3s ease;
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.3),
+    0 0 0 1px rgba(255, 255, 255, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.goal-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+}
+
+.goal-card:hover {
+  border-color: rgba(34, 197, 94, 0.5);
+  box-shadow: 
+    0 12px 40px rgba(34, 197, 94, 0.2),
+    0 0 0 1px rgba(34, 197, 94, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  transform: translateY(-4px);
+}
+
+.goal-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.goal-icon {
+  padding: 12px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #22c55e;
+  flex-shrink: 0;
+  background: rgba(34, 197, 94, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(34, 197, 94, 0.2);
+}
+
+.goal-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.goal-info h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 4px;
+  line-height: 1.3;
+}
+
+.goal-info p {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.85rem;
+  line-height: 1.4;
+}
+
+.goal-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.edit-icon {
+  color: rgba(255, 255, 255, 0.5);
+  transition: color 0.3s ease;
+  padding: 4px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.goal-card:hover .edit-icon {
+  color: #22c55e;
+  background: rgba(34, 197, 94, 0.1);
+}
+
+.goal-progress {
+  margin-bottom: 12px;
+}
+
+.progress-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.current-amount {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #22c55e;
+  text-shadow: 0 0 10px rgba(34, 197, 94, 0.3);
+}
+
+.target-amount {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.progress-bar-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.progress-bar {
+  flex: 1;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.progress-fill {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 0.3s ease;
+  background: linear-gradient(90deg, #22c55e, #16a34a);
+  box-shadow: 0 0 10px rgba(34, 197, 94, 0.5);
+}
+
+.progress-percentage {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #22c55e;
+  min-width: 45px;
+  text-align: right;
+  text-shadow: 0 0 10px rgba(34, 197, 94, 0.3);
+}
+
+.completion-badge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(34, 197, 94, 0.15);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: #22c55e;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  border: 1px solid rgba(34, 197, 94, 0.3);
+  box-shadow: 0 4px 15px rgba(34, 197, 94, 0.2);
+}
+
+/* iPhone-specific responsive design */
+@media (max-width: 375px) {
+  .roadmap-container {
+    padding: 15px 0;
+  }
+  
+  .roadmap-item:nth-child(odd) {
+    padding-right: 15px;
+  }
+  
+  .roadmap-item:nth-child(even) {
+    padding-left: 15px;
+  }
+  
+  .roadmap-connector {
+    top: 18px;
+  }
+  
+  .roadmap-item:nth-child(odd) .roadmap-connector {
+    right: -20px;
+  }
+  
+  .roadmap-item:nth-child(even) .roadmap-connector {
+    left: -20px;
+  }
+  
+  .goal-card {
+    padding: 16px;
+  }
+  
+  .goal-header {
+    gap: 10px;
+  }
+  
+  .goal-info h3 {
+    font-size: 1rem;
+  }
+  
+  .goal-info p {
+    font-size: 0.8rem;
+  }
+  
+  .current-amount {
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 320px) {
+  .roadmap-container {
+    padding: 10px 0;
+  }
+  
+  .roadmap-item:nth-child(odd) {
+    padding-right: 10px;
+  }
+  
+  .roadmap-item:nth-child(even) {
+    padding-left: 10px;
+  }
+  
+  .roadmap-connector {
+    top: 16px;
+  }
+  
+  .roadmap-item:nth-child(odd) .roadmap-connector {
+    right: -18px;
+  }
+  
+  .roadmap-item:nth-child(even) .roadmap-connector {
+    left: -18px;
+  }
+  
+  .goal-card {
+    padding: 14px;
+  }
+  
+  .goal-header {
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .goal-actions {
+    align-self: flex-end;
+  }
+  
+  .goal-info h3 {
+    font-size: 0.95rem;
+  }
+  
+  .goal-info p {
+    font-size: 0.75rem;
+  }
+} 

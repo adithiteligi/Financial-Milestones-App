@@ -1,0 +1,192 @@
+.milestone-selector {
+  margin-bottom: 24px;
+}
+
+.selector-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.selector-header h2 {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 6px;
+  text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+}
+
+.selector-header p {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.9rem;
+}
+
+.selector-container {
+  background: rgba(26, 26, 26, 0.7);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.3),
+    0 0 0 1px rgba(255, 255, 255, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.selector-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+}
+
+.current-milestone {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 16px;
+  padding: 16px;
+  background: rgba(34, 197, 94, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 12px;
+  border: 1px solid rgba(34, 197, 94, 0.2);
+}
+
+.milestone-icon {
+  color: #22c55e;
+  background: rgba(34, 197, 94, 0.1);
+  padding: 12px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(34, 197, 94, 0.2);
+  box-shadow: 0 4px 15px rgba(34, 197, 94, 0.2);
+}
+
+.milestone-info h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 4px;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+.milestone-info p {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.85rem;
+}
+
+.milestone-dropdown {
+  position: relative;
+}
+
+.milestone-select {
+  width: 100%;
+  padding: 14px 16px;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  cursor: pointer;
+}
+
+.milestone-select:focus {
+  outline: none;
+  border-color: rgba(34, 197, 94, 0.5);
+  box-shadow: 
+    0 0 0 3px rgba(34, 197, 94, 0.1),
+    0 0 20px rgba(34, 197, 94, 0.2);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.milestone-select option {
+  background: #1a1a1a;
+  color: #ffffff;
+  padding: 12px;
+}
+
+.dropdown-icon {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: rgba(255, 255, 255, 0.5);
+  pointer-events: none;
+  transition: color 0.3s ease;
+}
+
+.milestone-select:focus + .dropdown-icon {
+  color: #22c55e;
+}
+
+/* iPhone-specific responsive design */
+@media (max-width: 375px) {
+  .selector-container {
+    padding: 16px;
+  }
+  
+  .current-milestone {
+    padding: 12px;
+    gap: 12px;
+  }
+  
+  .milestone-icon {
+    padding: 10px;
+  }
+  
+  .milestone-info h3 {
+    font-size: 1rem;
+  }
+  
+  .milestone-info p {
+    font-size: 0.8rem;
+  }
+  
+  .milestone-select {
+    padding: 12px 14px;
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 320px) {
+  .selector-container {
+    padding: 14px;
+  }
+  
+  .current-milestone {
+    padding: 10px;
+    gap: 10px;
+  }
+  
+  .milestone-icon {
+    padding: 8px;
+  }
+  
+  .milestone-info h3 {
+    font-size: 0.95rem;
+  }
+  
+  .milestone-info p {
+    font-size: 0.75rem;
+  }
+  
+  .milestone-select {
+    padding: 10px 12px;
+    font-size: 0.9rem;
+  }
+} 
