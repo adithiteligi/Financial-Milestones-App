@@ -1,56 +1,71 @@
-.App {
+/* Theme variables */
+:root {
+  --color-bg: #f6f8f7;
+  --color-card: #fff;
+  --color-text: #222;
+  --color-accent: #2e7d32;
+  --color-border: #e0e0e0;
+  --color-muted: #6b7280;
+  --color-button-bg: #fff;
+  --color-button-text: #2e7d32;
+  --color-button-border: #2e7d32;
+}
+
+.dark {
+  --color-bg: #181a1b;
+  --color-card: #23272a;
+  --color-text: #f3f4f6;
+  --color-accent: #90ee90;
+  --color-border: #333;
+  --color-muted: #b0b3b8;
+  --color-button-bg: #23272a;
+  --color-button-text: #90ee90;
+  --color-button-border: #90ee90;
+}
+
+body, #root, .App {
+  background: var(--color-bg);
+  color: var(--color-text);
   min-height: 100vh;
-  background: 
-    radial-gradient(circle at 20% 80%, rgba(34, 197, 94, 0.1) 0%, transparent 50%),
-    radial-gradient(circle at 80% 20%, rgba(22, 163, 74, 0.1) 0%, transparent 50%),
-    radial-gradient(circle at 40% 40%, rgba(34, 197, 94, 0.05) 0%, transparent 50%),
-    linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
-  color: #ffffff;
+  margin: 0;
+  font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+}
+
+.card {
+  background: var(--color-card);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+  padding: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.button {
+  background: var(--color-button-bg);
+  color: var(--color-button-text);
+  border: 1.5px solid var(--color-button-border);
+  border-radius: 6px;
+  padding: 0.5rem 1.2rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+.button:hover {
+  background: var(--color-accent);
+  color: #fff;
+}
+
+.muted {
+  color: var(--color-muted);
+}
+
+/* Utility classes */
+.flex {
   display: flex;
-  flex-direction: column;
-  position: relative;
-  overflow-x: hidden;
+  align-items: center;
 }
 
-.App::before {
-  content: '';
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: 
-    radial-gradient(circle at 25% 25%, rgba(34, 197, 94, 0.03) 0%, transparent 50%),
-    radial-gradient(circle at 75% 75%, rgba(22, 163, 74, 0.03) 0%, transparent 50%);
-  pointer-events: none;
-  z-index: -1;
-}
-
-.main-content {
-  flex: 1;
-  padding: 16px;
-  max-width: 100%;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch; /* iOS smooth scrolling */
-  position: relative;
-  z-index: 1;
-}
-
-/* iPhone-specific responsive design */
-@media (max-width: 414px) {
-  .main-content {
-    padding: 12px;
-  }
-}
-
-@media (max-width: 375px) {
-  .main-content {
-    padding: 10px;
-  }
-}
-
-@media (max-width: 320px) {
-  .main-content {
-    padding: 8px;
-  }
+.space-between {
+  justify-content: space-between;
 } 

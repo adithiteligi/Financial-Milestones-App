@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import Roadmap from './components/Roadmap';
 import Header from './components/Header';
@@ -132,9 +132,24 @@ function App() {
   const totalCurrent = currentGoals.reduce((sum, goal) => sum + goal.currentAmount, 0);
   const overallProgress = totalTarget > 0 ? (totalCurrent / totalTarget) * 100 : 0;
 
+  const [theme, setTheme] = useState('light');
+
+  useEffect(() => {
+    document.documentElement.className = theme;
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme((prev) => (prev === 'light' ? 'dark' : 'light'));
+  };
+
   return (
     <div className="App">
-      <Header />
+      <header className="flex space-between" style={{padding: '1.5rem 2rem'}}>
+        <h1 style={{margin: 0}}>Money Milestones</h1>
+        <button className="button" onClick={toggleTheme} aria-label="Toggle theme">
+          {theme === 'light' ? '🌙 Dark Mode' : '☀️ Light Mode'}
+        </button>
+      </header>
       <div className="main-content">
         <MilestoneSelector 
           selectedMilestone={selectedMilestone}
