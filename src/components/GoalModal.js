@@ -52,7 +52,9 @@ const GoalModal = ({ goal, onClose, onSave, milestoneType }) => {
     if (goal) {
       return 'Edit Goal';
     }
-    return milestoneType === 'college' ? 'Add College Goal' : 'Add Home Goal';
+    if (milestoneType === 'college') return 'Add College Goal';
+    if (milestoneType === 'car') return 'Add Car Goal';
+    return 'Add Goal';
   };
 
   const handleSubmit = (e) => {
@@ -154,34 +156,28 @@ const GoalModal = ({ goal, onClose, onSave, milestoneType }) => {
             <div className="form-row">
               <div className="form-group">
                 <label htmlFor="targetAmount">Target Amount</label>
-                <div className="currency-input">
-                  <DollarSign size={16} />
-                  <input
-                    type="text"
-                    id="targetAmount"
-                    name="targetAmount"
-                    value={formData.targetAmount ? formatCurrency(formData.targetAmount) : ''}
-                    onChange={handleCurrencyChange}
-                    placeholder="0"
-                    required
-                  />
-                </div>
+                <input
+                  type="text"
+                  id="targetAmount"
+                  name="targetAmount"
+                  value={formData.targetAmount ? formatCurrency(formData.targetAmount) : ''}
+                  onChange={handleCurrencyChange}
+                  placeholder="0"
+                  required
+                />
               </div>
 
               <div className="form-group">
                 <label htmlFor="currentAmount">Current Amount</label>
-                <div className="currency-input">
-                  <DollarSign size={16} />
-                  <input
-                    type="text"
-                    id="currentAmount"
-                    name="currentAmount"
-                    value={formData.currentAmount ? formatCurrency(formData.currentAmount) : ''}
-                    onChange={handleCurrencyChange}
-                    placeholder="0"
-                    required
-                  />
-                </div>
+                <input
+                  type="text"
+                  id="currentAmount"
+                  name="currentAmount"
+                  value={formData.currentAmount ? formatCurrency(formData.currentAmount) : ''}
+                  onChange={handleCurrencyChange}
+                  placeholder="0"
+                  required
+                />
               </div>
             </div>
 

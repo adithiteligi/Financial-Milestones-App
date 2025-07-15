@@ -1,5 +1,5 @@
 import React from 'react';
-import { ChevronDown, GraduationCap, Home } from 'lucide-react';
+import { ChevronDown, GraduationCap, Home, Wrench } from 'lucide-react';
 import './MilestoneSelector.css';
 
 const MilestoneSelector = ({ selectedMilestone, onMilestoneChange }) => {
@@ -11,10 +11,10 @@ const MilestoneSelector = ({ selectedMilestone, onMilestoneChange }) => {
       description: 'Plan your education finances'
     },
     {
-      id: 'house',
-      name: 'Home Ownership',
-      icon: <Home size={20} />,
-      description: 'Save for your dream home'
+      id: 'car',
+      name: 'Car Purchase',
+      icon: <Wrench size={20} />, // Use a car-related icon
+      description: 'Save for your first car'
     }
   ];
 

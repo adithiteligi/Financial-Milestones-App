@@ -12,24 +12,33 @@ function App() {
     college: [
       {
         id: 1,
-        title: "Emergency Fund",
-        description: "Save $2,000 for unexpected expenses",
-        targetAmount: 2000,
-        currentAmount: 800,
+        title: "Student Loan Payoff",
+        description: "Pay off $7,000 in student loans",
+        targetAmount: 7000,
+        currentAmount: 2000,
         category: "emergency",
         completed: false
       },
       {
         id: 2,
+        title: "Emergency Fund",
+        description: "Save $10,000 for unexpected expenses",
+        targetAmount: 10000,
+        currentAmount: 3500,
+        category: "emergency",
+        completed: false
+      },
+      {
+        id: 3,
         title: "Tuition Payment",
-        description: "Pay next semester's tuition of $8,000",
-        targetAmount: 8000,
+        description: "Pay off $15,000 in tuition costs",
+        targetAmount: 15000,
         currentAmount: 3200,
         category: "tuition",
         completed: false
       },
       {
-        id: 3,
+        id: 4,
         title: "401k Contribution",
         description: "Contribute $6,000 to 401k this year",
         targetAmount: 6000,
@@ -38,59 +47,59 @@ function App() {
         completed: false
       },
       {
-        id: 4,
+        id: 5,
         title: "Graduation Fund",
-        description: "Save $5,000 for post-graduation expenses",
-        targetAmount: 5000,
+        description: "Save $12,000 for post-graduation expenses",
+        targetAmount: 12000,
         currentAmount: 1200,
         category: "graduation",
         completed: false
       }
     ],
-    house: [
+    car: [
       {
-        id: 5,
-        title: "Down Payment Fund",
-        description: "Save $40,000 for 20% down payment",
-        targetAmount: 40000,
-        currentAmount: 12000,
+        id: 6,
+        title: "Car Down Payment",
+        description: "Save $6,000 for a car down payment",
+        targetAmount: 6000,
+        currentAmount: 1200,
         category: "downpayment",
         completed: false
       },
       {
-        id: 6,
+        id: 7,
         title: "Emergency Fund",
-        description: "Build 6-month emergency fund of $15,000",
-        targetAmount: 15000,
-        currentAmount: 8000,
+        description: "Save $2,000 for unexpected car expenses",
+        targetAmount: 2000,
+        currentAmount: 500,
         category: "emergency",
         completed: false
       },
       {
-        id: 7,
-        title: "Closing Costs",
-        description: "Save $8,000 for closing costs and fees",
-        targetAmount: 8000,
-        currentAmount: 3000,
-        category: "closing",
-        completed: false
-      },
-      {
         id: 8,
-        title: "Home Maintenance Fund",
-        description: "Save $10,000 for home repairs and maintenance",
-        targetAmount: 10000,
-        currentAmount: 2500,
-        category: "maintenance",
+        title: "Registration & Fees",
+        description: "Save $800 for registration and fees",
+        targetAmount: 800,
+        currentAmount: 200,
+        category: "fees",
         completed: false
       },
       {
         id: 9,
-        title: "Property Tax Fund",
-        description: "Save $6,000 for annual property taxes",
-        targetAmount: 6000,
-        currentAmount: 1800,
-        category: "taxes",
+        title: "Insurance Fund",
+        description: "Save $1,500 for car insurance",
+        targetAmount: 1500,
+        currentAmount: 300,
+        category: "insurance",
+        completed: false
+      },
+      {
+        id: 10,
+        title: "Maintenance Fund",
+        description: "Save $1,000 for car maintenance",
+        targetAmount: 1000,
+        currentAmount: 100,
+        category: "maintenance",
         completed: false
       }
     ]
@@ -146,37 +155,42 @@ function App() {
     <div className="App">
       <header className="flex space-between" style={{padding: '1.5rem 2rem'}}>
         <h1 style={{margin: 0}}>Money Milestones</h1>
-        <button className="button" onClick={toggleTheme} aria-label="Toggle theme">
-          {theme === 'light' ? '🌙 Dark Mode' : '☀️ Light Mode'}
+        <button 
+          className="button theme-toggle-btn" 
+          onClick={toggleTheme} 
+          aria-label="Toggle theme"
+          style={{ fontSize: '1.3rem', padding: '0.3rem 0.7rem', minWidth: 'unset', borderRadius: '50%' }}
+        >
+          {theme === 'light' ? '🌙' : '☀️'}
         </button>
       </header>
       <div className="main-content">
         <MilestoneSelector 
-          selectedMilestone={selectedMilestone}
-          onMilestoneChange={setSelectedMilestone}
+          selectedMilestone={selectedMilestone} 
+          onMilestoneChange={setSelectedMilestone} 
         />
         <FinancialSummary 
-          totalTarget={totalTarget}
-          totalCurrent={totalCurrent}
-          overallProgress={overallProgress}
+          totalTarget={totalTarget} 
+          totalCurrent={totalCurrent} 
+          overallProgress={overallProgress} 
           onAddGoal={() => openGoalModal()}
-          milestoneType={selectedMilestone}
+          milestoneType={selectedMilestone} 
         />
         <Roadmap 
-          goals={currentGoals}
+          goals={currentGoals} 
           onGoalClick={openGoalModal}
           onUpdateProgress={updateGoalProgress}
-          milestoneType={selectedMilestone}
+          milestoneType={selectedMilestone} 
         />
+        {showModal && (
+          <GoalModal 
+            goal={selectedGoal} 
+            onClose={closeModal} 
+            onSave={selectedGoal ? updateGoalProgress : addGoal}
+            milestoneType={selectedMilestone} 
+          />
+        )}
       </div>
-      {showModal && (
-        <GoalModal
-          goal={selectedGoal}
-          onClose={closeModal}
-          onSave={selectedGoal ? updateGoalProgress : addGoal}
-          milestoneType={selectedMilestone}
-        />
-      )}
     </div>
   );
 }

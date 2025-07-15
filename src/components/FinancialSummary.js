@@ -27,8 +27,8 @@ const FinancialSummary = ({ totalTarget, totalCurrent, overallProgress, onAddGoa
     switch (milestoneType) {
       case 'college':
         return 'Add College Goal';
-      case 'house':
-        return 'Add Home Goal';
+      case 'car':
+        return 'Add Car Goal';
       default:
         return 'Add Goal';
     }

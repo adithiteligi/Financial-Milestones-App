@@ -29,6 +29,21 @@ const Roadmap = ({ goals, onGoalClick, onUpdateProgress, milestoneType }) => {
         default:
           return <Target size={24} />;
       }
+    } else if (milestoneType === 'car') {
+      switch (category) {
+        case 'downpayment':
+          return <DollarSign size={24} />;
+        case 'emergency':
+          return <Shield size={24} />;
+        case 'fees':
+          return <FileText size={24} />;
+        case 'insurance':
+          return <CheckCircle size={24} />;
+        case 'maintenance':
+          return <Wrench size={24} />;
+        default:
+          return <Target size={24} />;
+      }
     } else if (milestoneType === 'house') {
       switch (category) {
         case 'downpayment':
@@ -166,7 +181,7 @@ const Roadmap = ({ goals, onGoalClick, onUpdateProgress, milestoneType }) => {
         {goals.map((goal, index) => {
           const progress = calculateProgress(goal.currentAmount, goal.targetAmount);
           const categoryColor = getCategoryColor(goal.category, milestoneType);
-          
+          const isFinalMilestone = index === goals.length - 1;
           return (
             <motion.div
               key={goal.id}
@@ -181,13 +196,17 @@ const Roadmap = ({ goals, onGoalClick, onUpdateProgress, milestoneType }) => {
                 <div className="connector-dot" style={{ backgroundColor: categoryColor }}></div>
               </div>
               
-              <div className="goal-card">
+              <div className={`goal-card${isFinalMilestone ? ' final-milestone' : ''}`}>
                 <div className="goal-header">
                   <div className="goal-icon" style={{ backgroundColor: `${categoryColor}20` }}>
                     {getCategoryIcon(goal.category, milestoneType)}
                   </div>
                   <div className="goal-info">
-                    <h3>{goal.title}</h3>
+                    {isFinalMilestone ? (
+                      <h3 className="final-milestone-title">{goal.title} <span role="img" aria-label="star">⭐</span></h3>
+                    ) : (
+                      <h3>{goal.title}</h3>
+                    )}
                     <p>{goal.description}</p>
                   </div>
                   <div className="goal-actions">
