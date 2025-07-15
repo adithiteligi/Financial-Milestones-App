@@ -5,6 +5,7 @@ import Header from './components/Header';
 import FinancialSummary from './components/FinancialSummary';
 import GoalModal from './components/GoalModal';
 import MilestoneSelector from './components/MilestoneSelector';
+import OverallContributionsChart from './components/OverallContributionsChart';
 
 function App() {
   const [selectedMilestone, setSelectedMilestone] = useState('college');
@@ -105,18 +106,31 @@ function App() {
     ]
   });
 
+  const [contributions, setContributions] = useState([]);
+
   const [showModal, setShowModal] = useState(false);
   const [selectedGoal, setSelectedGoal] = useState(null);
 
   const updateGoalProgress = (goalId, newAmount) => {
-    setGoals(prevGoals => ({
-      ...prevGoals,
-      [selectedMilestone]: prevGoals[selectedMilestone].map(goal => 
-        goal.id === goalId 
-          ? { ...goal, currentAmount: newAmount, completed: newAmount >= goal.targetAmount }
-          : goal
-      )
-    }));
+    setGoals(prevGoals => {
+      const updatedGoals = prevGoals[selectedMilestone].map(goal => {
+        if (goal.id === goalId) {
+          const amountAdded = newAmount - goal.currentAmount;
+          if (amountAdded > 0) {
+            setContributions(prev => [
+              ...prev,
+              { date: new Date().toISOString(), amount: amountAdded }
+            ]);
+          }
+          return { ...goal, currentAmount: newAmount, completed: newAmount >= goal.targetAmount };
+        }
+        return goal;
+      });
+      return {
+        ...prevGoals,
+        [selectedMilestone]: updatedGoals
+      };
+    });
   };
 
   const addGoal = (newGoal) => {
@@ -140,6 +154,20 @@ function App() {
   const totalTarget = currentGoals.reduce((sum, goal) => sum + goal.targetAmount, 0);
   const totalCurrent = currentGoals.reduce((sum, goal) => sum + goal.currentAmount, 0);
   const overallProgress = totalTarget > 0 ? (totalCurrent / totalTarget) * 100 : 0;
+
+  const onMoveGoal = (index, direction) => {
+    setGoals(prevGoals => {
+      const list = [...prevGoals[selectedMilestone]];
+      const newIndex = index + direction;
+      if (newIndex < 0 || newIndex >= list.length) return prevGoals;
+      const [moved] = list.splice(index, 1);
+      list.splice(newIndex, 0, moved);
+      return {
+        ...prevGoals,
+        [selectedMilestone]: list
+      };
+    });
+  };
 
   const [theme, setTheme] = useState('light');
 
@@ -175,12 +203,14 @@ function App() {
           overallProgress={overallProgress} 
           onAddGoal={() => openGoalModal()}
           milestoneType={selectedMilestone} 
+          contributions={contributions}
         />
         <Roadmap 
           goals={currentGoals} 
           onGoalClick={openGoalModal}
           onUpdateProgress={updateGoalProgress}
           milestoneType={selectedMilestone} 
+          onMoveGoal={onMoveGoal}
         />
         {showModal && (
           <GoalModal 

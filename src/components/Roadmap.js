@@ -10,11 +10,13 @@ import {
   Home,
   DollarSign,
   Wrench,
-  FileText
+  FileText,
+  ArrowUp,
+  ArrowDown
 } from 'lucide-react';
 import './Roadmap.css';
 
-const Roadmap = ({ goals, onGoalClick, onUpdateProgress, milestoneType }) => {
+const Roadmap = ({ goals, onGoalClick, onUpdateProgress, milestoneType, onMoveGoal }) => {
   const getCategoryIcon = (category, milestoneType) => {
     if (milestoneType === 'college') {
       switch (category) {
@@ -203,7 +205,7 @@ const Roadmap = ({ goals, onGoalClick, onUpdateProgress, milestoneType }) => {
                   </div>
                   <div className="goal-info">
                     {isFinalMilestone ? (
-                      <h3 className="final-milestone-title">{goal.title} <span role="img" aria-label="star">⭐</span></h3>
+                      <h3 className="final-milestone-title">{goal.title}</h3>
                     ) : (
                       <h3>{goal.title}</h3>
                     )}
@@ -213,6 +215,24 @@ const Roadmap = ({ goals, onGoalClick, onUpdateProgress, milestoneType }) => {
                     {goal.completed && <CheckCircle size={20} color="#22c55e" />}
                     <Edit3 size={16} className="edit-icon" />
                   </div>
+                </div>
+                <div className="move-goal-btn-group">
+                  <button
+                    className="move-goal-btn"
+                    onClick={e => { e.stopPropagation(); onMoveGoal(index, -1); }}
+                    disabled={index === 0}
+                    aria-label="Move up"
+                  >
+                    <ArrowUp size={16} />
+                  </button>
+                  <button
+                    className="move-goal-btn"
+                    onClick={e => { e.stopPropagation(); onMoveGoal(index, 1); }}
+                    disabled={index === goals.length - 1}
+                    aria-label="Move down"
+                  >
+                    <ArrowDown size={16} />
+                  </button>
                 </div>
                 
                 <div className="goal-progress">

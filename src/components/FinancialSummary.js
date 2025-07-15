@@ -1,8 +1,9 @@
 import React from 'react';
 import { Plus, TrendingUp, Target } from 'lucide-react';
 import './FinancialSummary.css';
+import OverallContributionsChart from './OverallContributionsChart';
 
-const FinancialSummary = ({ totalTarget, totalCurrent, overallProgress, onAddGoal, milestoneType }) => {
+const FinancialSummary = ({ totalTarget, totalCurrent, overallProgress, onAddGoal, milestoneType, contributions }) => {
   const formatCurrency = (amount) => {
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
@@ -13,14 +14,7 @@ const FinancialSummary = ({ totalTarget, totalCurrent, overallProgress, onAddGoa
   };
 
   const getMilestoneTitle = () => {
-    switch (milestoneType) {
-      case 'college':
-        return 'College Financial Overview';
-      case 'house':
-        return 'Home Ownership Overview';
-      default:
-        return 'Financial Overview';
-    }
+    return 'Financial Overview';
   };
 
   const getAddButtonText = () => {
@@ -83,6 +77,7 @@ const FinancialSummary = ({ totalTarget, totalCurrent, overallProgress, onAddGoa
           </div>
         </div>
       </div>
+      <OverallContributionsChart contributions={contributions} />
     </div>
   );
 };

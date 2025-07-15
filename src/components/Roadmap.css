@@ -171,6 +171,15 @@
   overflow: hidden;
 }
 
+.move-goal-btn-group {
+  position: absolute;
+  left: 12px;
+  bottom: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
 .goal-card::before {
   content: '';
   position: absolute;
@@ -192,6 +201,7 @@
   align-items: flex-start;
   gap: 12px;
   margin-bottom: 16px;
+  font-size: 0.85em;
 }
 
 .goal-icon {
@@ -214,17 +224,17 @@
 }
 
 .goal-info h3 {
-  font-size: 0.88rem;
+  font-size: 0.75rem;
   font-weight: 600;
   color: var(--color-text);
   margin-bottom: 4px;
-  line-height: 1.3;
+  line-height: 1.2;
 }
 
 .goal-info p {
   color: var(--color-muted);
-  font-size: 0.85rem;
-  line-height: 1.4;
+  font-size: 0.72rem;
+  line-height: 1.3;
 }
 
 .goal-actions {
@@ -232,14 +242,13 @@
   align-items: center;
   gap: 6px;
   flex-shrink: 0;
+  margin-left: auto;
 }
 
 .edit-icon {
-  color: var(--color-muted);
-  transition: color 0.3s ease;
-  padding: 4px;
-  border-radius: 6px;
-  background: var(--color-card);
+  margin-left: 8px;
+  font-size: 0.9em;
+  opacity: 0.7;
 }
 
 .goal-card:hover .edit-icon {
@@ -259,14 +268,14 @@
 }
 
 .current-amount {
-  font-size: 1rem;
+  font-size: 0.85rem;
   font-weight: 600;
   color: var(--color-accent);
   text-shadow: none;
 }
 
 .target-amount {
-  font-size: 0.8rem;
+  font-size: 0.68rem;
   color: var(--color-muted);
 }
 
@@ -296,7 +305,7 @@
 }
 
 .progress-percentage {
-  font-size: 0.85rem;
+  font-size: 0.72rem;
   font-weight: 600;
   color: var(--color-accent);
   min-width: 45px;
@@ -310,9 +319,9 @@
   gap: 6px;
   background: rgba(46, 125, 50, 0.08);
   color: var(--color-accent);
-  padding: 8px 12px;
+  padding: 6px 10px;
   border-radius: 8px;
-  font-size: 0.8rem;
+  font-size: 0.68rem;
   font-weight: 600;
   border: 1px solid var(--color-accent);
   box-shadow: 0 2px 8px var(--color-accent);
@@ -331,6 +340,27 @@
   display: flex;
   align-items: center;
   gap: 0.3em;
+}
+
+.move-goal-btn {
+  background: none;
+  border: none;
+  padding: 2px 4px;
+  margin: 0 2px;
+  cursor: pointer;
+  opacity: 0.6;
+  transition: opacity 0.2s;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+}
+.move-goal-btn:disabled {
+  opacity: 0.2;
+  cursor: default;
+}
+.move-goal-btn:hover:not(:disabled) {
+  opacity: 1;
+  background: var(--color-border);
 }
 
 /* iPhone-specific responsive design */
