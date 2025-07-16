@@ -106,7 +106,11 @@ function App() {
     ]
   });
 
-  const [contributions, setContributions] = useState([]);
+  // Change contributions to be milestone-specific
+  const [contributions, setContributions] = useState({
+    college: [],
+    car: []
+  });
 
   const [showModal, setShowModal] = useState(false);
   const [selectedGoal, setSelectedGoal] = useState(null);
@@ -117,10 +121,13 @@ function App() {
         if (goal.id === goalId) {
           const amountAdded = newAmount - goal.currentAmount;
           if (amountAdded > 0) {
-            setContributions(prev => [
+            setContributions(prev => ({
               ...prev,
-              { date: new Date().toISOString(), amount: amountAdded }
-            ]);
+              [selectedMilestone]: [
+                ...prev[selectedMilestone],
+                { date: new Date().toISOString(), amount: amountAdded }
+              ]
+            }));
           }
           return { ...goal, currentAmount: newAmount, completed: newAmount >= goal.targetAmount };
         }
@@ -203,7 +210,7 @@ function App() {
           overallProgress={overallProgress} 
           onAddGoal={() => openGoalModal()}
           milestoneType={selectedMilestone} 
-          contributions={contributions}
+          contributions={contributions[selectedMilestone]}
         />
         <Roadmap 
           goals={currentGoals} 
